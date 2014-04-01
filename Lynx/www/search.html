@@ -1,0 +1,134 @@
+<HTML>
+<HEAD>
+<TITLE> NewsIR </TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="imagetoolbar" content="no">
+<link href="js/axurerp_pagespecificstyles.css" type="text/css" rel="stylesheet">
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<link rel="stylesheet" href="js/jquery.bigautocomplete.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.bigautocomplete.js"></script>
+<!--[if IE 6]>
+<![endif]-->
+<style type="text/css">
+<!--
+body {
+	background-color: #FFFFFF;
+	background-image: url();
+}
+.STYLE2 {color: #CCE8CF}
+.STYLE3 {
+	color: #222;
+	font-family: Arial;
+	font-size: 24px;
+}
+-->
+	div#container{width:auto;}
+		div#menu1 {margin-left:9%}
+	div#image_container{width:auto;margin-top:14%;}
+   	div#inputAndbotton{width:70%;float:left;margin-left:27%;margin-top:1%;}
+</style>
+</HEAD>
+<BODY style="position:relative;">
+	<script type="text/javascript">
+		$(function(){
+			//var gobal;
+			var url_ = "../queryCom.php";
+			$("#u1").bigAutocomplete({url:url_});                             
+		})
+	</script>
+<span class="STYLE2"></span>
+<DIV class="ctr-p">
+	<form action="result.php" method="post" >
+		<div class = "u3" id="container">
+				<div id="menu1">
+					<select name="model" size="1" >
+					  <option value="vector">vector by relevance</option>
+					  <option value="boolTime">boolean by time</option>
+					  <option value="boolPop">boolean by popularity</option>
+					  <option value="kProxTime">k-proximity by time</option>
+					  <option value="kProxPop">k-proximity by popularity</option>
+					</select>			   
+				</div>
+		</div>
+		<div id="image_container">
+				<img src="search_files/logo.png"  style="margin-left:39%;width:22%;height:15%">
+		</div>
+		<div class="main_container STYLE1" id="inputAndbotton" style="font-weight:bold;font-family:Arial;">
+			<INPUT id="u1" type="text" class="u1" name="tokens" autocomplete="off">
+			<INPUT id="u2" type="submit" class="u2" name="submit" value="search">
+		</div >
+	</form>
+</div>
+
+<script>
+/*
+function trim(str){ //删除左右两端的空格
+	return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+
+function  check(){
+	
+	input = document.getElementsByName("tokens")[0].value;
+	input = trim(input);
+	inputs = "";
+	
+	var r = /\//;
+	if( r.test(input.charAt(0)) && r.test(input.charAt(input.length-1)) )
+	{
+		for(i=1;i<input.length-1;i++)
+		{
+			var reg=/^[a-zA-Z]$/g;
+			if (input.charAt(i) == " "){
+			  inputs += " ";
+			  continue;
+			}
+			if(reg.test(input.charAt(i)))
+			{
+				inputs += input.charAt(i);
+			}
+			else
+			{
+				inputs += " ";
+			}
+		}
+		if(inputs == input.match(/ * /))
+			inputs = "welcome to use Lynx!";
+		inputs = "/" + inputs + "/";
+	}
+	else
+	{
+		for(i=0;i<input.length;i++)
+		{
+			var reg=/^[a-zA-Z]$/g;
+			if (input.charAt(i) == " "){
+			  inputs += " ";
+			  continue;
+			}
+			if(reg.test(input.charAt(i)))
+			{
+				inputs += input.charAt(i);
+			}
+			else
+			{
+				inputs += " ";
+			}
+		}
+		if(inputs == input.match(/ * /))
+			inputs = "welcome to use Lynx!";
+	}
+
+	document.getElementsByName("tokens")[0].value = inputs;
+}*/
+</script>
+
+</DIV>
+</BODY>
+<!--
+	<SCRIPT src="resources/scripts/axurerp_pagescript.js"></SCRIPT> 
+-->
+<!--
+	<SCRIPT src="search_files/axurerp_pagespecificscript.js" charset="utf-8"></SCRIPT>
+-->

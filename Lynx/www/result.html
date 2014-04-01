@@ -1,0 +1,211 @@
+<HTML>
+<HEAD>
+<TITLE> NewsIR </TITLE>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="imagetoolbar" content="no">
+<link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet">
+<link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet">
+<link href="result_files/axurerp_pagespecificstyles.css" type="text/css" rel="stylesheet">
+<!--[if IE 6]>
+<![endif]-->
+<SCRIPT src="resources/scripts/jquery-1.4.2.min.js"></SCRIPT>
+<SCRIPT src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></SCRIPT>
+<SCRIPT src="resources/scripts/axurerp_beforepagescript.js"></SCRIPT>
+<SCRIPT src="resources/scripts/messagecenter.js"></SCRIPT>
+<style type="text/css">
+<!--
+body {
+	background-color: #FFFFFF;
+	background-image: url();
+}
+-->
+	div#container1{width:auto;}
+	div#menu1 {margin-left:80px;}
+	div#container_newscontent{width:680;float:left;}
+		div#divNews0{margin-left:80px;}
+		div#divNews1{margin-left:80px;}
+		div#divNews2{margin-left:80px;}
+		div#divNews3{margin-left:80px;}
+		div#divNews4{margin-left:80px;}
+		div#divNews5{margin-left:80px;}
+		div#divNews6{margin-left:80px;}
+		div#divNews6{margin-left:80px;}
+		div#divNews7{margin-left:80px;}
+		div#divNews8{margin-left:80px;}
+		div#divNews9{margin-left:80px;}
+	div#container_peopleAlsoSearch{width:560px;float:left;}
+		div#peopleAlsoSearch_head{width:480px;float:left;margin-left:80px;}
+		div#container_peopleAlsoSearch1{width:240;float:left;margin-left:80px;}
+		div#container_peopleAlsoSearch2{width:240;float:left;}
+	div#text_container{width560;float:left;}
+		div#txt{width:480px;float:left;margin-left:80px;margin-top:50px;}
+	div#container_searchRec{width:680px;left:80px;}
+	div#container_divPagenation{width:680px;float:left;}
+		div#divPagenation{width:600px;margin-left:80px;}
+.STYLE4 {font-family: Arial}
+</style>   
+</HEAD>
+<BODY style="position:relative;">
+
+<?php 
+	if(! $_POST["page"]){ $page = '1'; }
+	else{$page = $_POST["page"];}
+	$tokens = $_POST['tokens'];
+	$model = $_POST['model'];
+	$sortby = $_POST['sortby'];
+	//print_r($_POST);
+	// Create the socket and connect 
+	$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP); 
+	$connection = socket_connect($socket,'127.0.0.1', 7861); 
+
+	//写数据到socket缓存   json_encode($_POST) 		
+	if(!socket_write($socket, $page . '<#>' . $tokens. '<#>' . $model . '<#>' . $sortby)){  
+		printf("Write failed");  
+	}  
+
+	while($temp = socket_read($socket, 1024, PHP_NORMAL_READ)) { 
+		$buffer .= $temp;
+	}
+	
+	socket_close($socket);  
+?>
+
+<DIV class="main_container">
+	<form action="result.php" method="post">
+	<div id="container1" style="background:#000; color:#222">
+	   <div id="menu1">
+			<select name="model" size="1">
+			  <option value="vector">vector space model</option>
+			  <option value="bool">boolean retrieval</option>
+			</select>
+		   <select name="sortby" size="0.5">
+			 <option value="relevance">relevance</option>
+			 <option value="heat">popularity</option>
+			 <option value="time">time </option>
+		   </select>      
+		</div>
+    </div>
+	<div>
+		<input id=u0 type=text value="<?php echo $_POST['tokens']; ?>" class="u0"  name="tokens">
+		<input name="submit" type=submit class="u1" id=u1 value="search">
+	</div>
+	<br/>
+	<br/>
+	</form>
+</div>
+<DIV id="container_newscontent">
+	<div id="divNews0" class="divNews0"></div>
+	<div id="divNews1" class="divNews1"></div>
+	<div id="divNews2" class="divNews2"></div>
+	<div id="divNews3" class="divNews3"></div>
+	<div id="divNews4" class="divNews4"></div>
+	<div id="divNews5" class="divNews5"></div>
+	<div id="divNews6" class="divNews6"></div>
+	<div id="divNews7" class="divNews7"></div>
+	<div id="divNews8" class="divNews8"></div>
+	<div id="divNews9" class="divNews9"></div>
+</DIV>
+<br/>
+<br/>
+<div id="container_peopleAlsoSearch">
+	<div class="STYLE4" id="peopleAlsoSearch_head"><strong>People Also Search:</strong></div>
+	<div id="container_peopleAlsoSearch1">
+		<div id="peopleAlsoSearch0">peopleAlsoSearch0</div>
+		<div id="peopleAlsoSearch2">peopleAlsoSearch2</div>
+		<div id="peopleAlsoSearch5">peopleAlsoSearch5</div>
+	</div>
+	<div id="container_peopleAlsoSearch2">
+		<div id="peopleAlsoSearch1">peopleAlsoSearch1</div>
+		<div id="peopleAlsoSearch3">peopleAlsoSearch3</div>
+		<div id="peopleAlsoSearch4">peopleAlsoSearch4</div>
+	</div>
+</div>
+<br/><br/>
+<div id="text_container">
+	<br/>
+	<br/>
+	<div id="txt">
+		i am testing!i am testing!i am testing!i am testing!i am testing!
+		i am testing!i am testing!i am testing!i am testing!i am testing!testing!i am testing!i am testing!i am testing!i am testing!i am testing!i am testing!
+	</div>
+</div>
+<div id="container_searchRec">
+	<table width="587" cellpadding="0">
+		<tbody>
+			<tr>
+				<th width="73" rowspan="2" class="searchRec"></th>
+			  <th colspan="7" align="left" valign="baseline"><strong>Search Recommendation:</strong>
+			  <div id="searchRec2"></div>
+			  <div id="searchRec3"></div></th>
+			</tr>
+			<tr>
+				<th width="102" align="left" valign="baseline">
+					<div id="searchRec4">searchRec0</div>			  </th>
+				<td width="9"></td>
+				<th width="119" align="left" valign="baseline">
+					<div id="searchRec5">searchRec1</div>			  </th>
+				<td width="9"></td>
+				<th width="119" align="left" valign="baseline">
+					<div id="searchRec6">searchRec2</div>			  </th>
+				<td width="9" ></td>
+				<th width="111" align="left" valign="baseline">
+					<div id="searchRec7">searchRec3</div>			  </th>
+			</tr>
+			<tr>
+			  <th height="22" class="searchRec"></th>
+			  <th align="left" valign="baseline"><div id="searchRec0">searchRec4</div></th>
+			  <td></td>
+			  <th align="left" valign="baseline"><div id="searchRec1">searchRec5</div></th>
+			  <td></td>
+			  <th align="left" valign="baseline">searchRec6</th>
+			  <td ></td>
+			  <th align="left" valign="baseline">searchRec7</th>
+		  </tr>
+		</tbody>
+  </table>
+</div>
+<br/><br/>
+<div id="container_divPagenation">
+	<div id="divPagenation"></div>
+	<br/>
+	<br/>
+</div>
+<SCRIPT LANGUAGE="JavaScript">
+pageSizeCount = 5;
+perPageNews = 10;
+currentPage = parseInt(<?php echo $page;?>);
+
+divNewsArr = new Array(perPageNews);
+strDisplayArr = ["","","","","","","","","",""];
+for(i=0;i<perPageNews;i++)
+{
+	divNewsArr[i] = document.getElementById("divNews"+i.toString());
+}
+
+divPagenation=document.getElementById("divPagenation");
+strPagenation="";
+if(currentPage&&currentPage!=1)
+	strPagenation+='<a href="result.php?page=<?php echo (int)($page)-1; ?>&tokens=<?php echo $tokens; ?>">Previous</a>&nbsp;&nbsp;';
+else
+	strPagenation+='Previous&nbsp;&nbsp;';
+for(i=1;i<=pageSizeCount;i++)
+{
+	if(i!=currentPage)
+		strPagenation+='<a href="result.php?page='+i+'&tokens=<?php echo $tokens; ?>">'+i+'</a>&nbsp;&nbsp;';
+	else
+		strPagenation+=i+"&nbsp;&nbsp;";
+}
+if(currentPage&&currentPage!=pageSizeCount)
+	strPagenation+='<a href="result.php?page=<?php echo (int)($page)+1; ?>&tokens=<?php echo $tokens; ?>">Next</a>&nbsp;&nbsp;';
+else
+	strPagenation+="Next&nbsp;&nbsp;";
+divPagenation.innerHTML=strPagenation;
+
+s="<?php echo mysql_escape_string($buffer);?>";
+tempArr = s.split("<similar_words>");
+newsArr = tempArr[0].split("<##>");
+newsArr.pop();
+
+</SCRIPT>
+</BODY>
+</HTML>
